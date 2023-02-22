@@ -152,6 +152,16 @@ func WithStack(err error) error {
 	}
 }
 
+func WithSkipStack(err error, skip int) error {
+	if err == nil {
+		return nil
+	}
+	return &withStack{
+		err,
+		callersWithSkip(skip),
+	}
+}
+
 type withStack struct {
 	error
 	*stack

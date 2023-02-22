@@ -167,6 +167,13 @@ func callers() *stack {
 	var st stack = pcs[0:n]
 	return &st
 }
+func callersWithSkip(skip int) *stack {
+	const depth = 32
+	var pcs [depth]uintptr
+	n := runtime.Callers(3+skip, pcs[:])
+	var st stack = pcs[0:n]
+	return &st
+}
 
 // funcname removes the path prefix component of a function's name reported by func.Name().
 func funcname(name string) string {
