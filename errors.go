@@ -105,6 +105,12 @@ func New(message string) error {
 		stack: callers(),
 	}
 }
+func NewWithSkip(message string, skipStack int) error {
+	return &fundamental{
+		msg:   message,
+		stack: callersWithSkip(skipStack),
+	}
+}
 
 // Errorf formats according to a format specifier and returns the string
 // as a value that satisfies error.
